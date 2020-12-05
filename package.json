@@ -1,0 +1,23 @@
+{
+  "name": "03-bases-node",
+  "version": "1.0.0",
+  "description": "Esta es una aplicación de línea de comandos de Node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raulrobi2018/03-bases-node.git"
+  },
+  "author": "Raul Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raulrobi2018/03-bases-node/issues"
+  },
+  "homepage": "https://github.com/raulrobi2018/03-bases-node#readme",
+  "dependencies": {
+    "yargs": "^16.1.1"
+  },
+  "devDependencies": {}
+}
