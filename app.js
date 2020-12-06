@@ -10,17 +10,39 @@ const argv = require("yargs")
             default: 10
         }
     })
+    .command(
+        "crear",
+        "Crea archivo txt con la multiplicación según los parámetros recibidos",
+        {
+            base: {
+                demand: true,
+                alias: "b"
+            },
+            limite: {
+                alias: "l",
+                default: 10
+            }
+        }
+    )
     .help().argv;
 
-const {crearArchivo} = require("./multiplicar/multiplicar");
+const {crearArchivo, listarTabla} = require("./multiplicar/multiplicar");
 
-console.log(argv);
+let comando = argv._[0];
 
-console.log("Base", argv.base);
-console.log("Límite", argv.limite);
+switch (comando) {
+    case "listar":
+        listarTabla(argv.base, argv.limite);
+        break;
+    case "crear":
+        crearArchivo(argv.base, argv.limite)
+            .then((archivo) =>
+                console.log(`Se ha creado el archivo ${archivo}`)
+            )
+            .catch((error) => console.log(error));
+        break;
 
-/*
-crearArchivo(paramArr[1])
-    .then((archivo) => console.log(`Se ha creado el archivo ${archivo}`))
-    .catch((error) => console.log(error));
- */
+    default:
+        console.log("Comando no reconocido");
+        break;
+}

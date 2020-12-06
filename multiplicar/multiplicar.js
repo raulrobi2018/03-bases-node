@@ -1,6 +1,13 @@
 const fs = require("fs");
 
-const crearArchivo = (base) => {
+// Inicializamos limite con 10 por defecto
+const listarTabla = (base, limite = 10) => {
+    for (let i = 1; i <= limite; i++) {
+        console.log(`${base} * ${i} = ${base * i} \n`);
+    }
+};
+
+const crearArchivo = (base, limite = 10) => {
     return new Promise((resolve, reject) => {
         let data = "";
 
@@ -10,7 +17,7 @@ const crearArchivo = (base) => {
             return;
         }
 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= limite; i++) {
             data += `${base} * ${i} = ${base * i} \n`;
         }
 
@@ -24,5 +31,6 @@ const crearArchivo = (base) => {
 };
 
 module.exports = {
-    crearArchivo
+    crearArchivo,
+    listarTabla
 };
