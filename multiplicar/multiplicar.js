@@ -1,9 +1,15 @@
 const fs = require("fs");
 
+const colors = require("colors/safe");
+
 // Inicializamos limite con 10 por defecto
 const listarTabla = (base, limite = 10) => {
+    console.log("==========================================".green);
+    console.log(`=== Tabla del ${base} con límite ${limite}`.blue);
+    console.log("==========================================".green);
+
     for (let i = 1; i <= limite; i++) {
-        console.log(`${base} * ${i} = ${base * i} \n`);
+        console.log(`${base} * ${i} = ${base * i}`);
     }
 };
 
@@ -24,7 +30,7 @@ const crearArchivo = (base, limite = 10) => {
         fs.writeFile(`tablas/Tabla del ${base}.txt`, data, (err) => {
             if (err) reject(err);
             else {
-                resolve(`Tabla del ${base}.txt`);
+                resolve(colors.green(`Tabla del ${base}.txt`, "creado"));
             }
         });
     });
