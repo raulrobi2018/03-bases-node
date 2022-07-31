@@ -13,7 +13,8 @@ const listarTabla = (base, limite = 10) => {
     }
 };
 
-const crearArchivo = (base, limite = 10) => {
+//Por defecto le pongo base = 5
+const crearArchivo = (base = 5, limite = 10) => {
     return new Promise((resolve, reject) => {
         let data = "";
 
@@ -27,7 +28,30 @@ const crearArchivo = (base, limite = 10) => {
             data += `${base} * ${i} = ${base * i} \n`;
         }
 
-        fs.writeFile(`tablas/Tabla del ${base}.txt`, data, (err) => {
+        fs.writeFileSync(`tablas/Tabla del ${base}.txt`, data, (err) => {
+            if (err) reject(err);
+            else {
+                resolve(colors.green(`Tabla del ${base}.txt`, "creado"));
+            }
+        });
+    });
+};
+
+const crearArchivoAsync = async (base = 5, limite = 10) => {
+    return new Promise((resolve, reject) => {
+        let data = "";
+
+        // Controla que sea número
+        if (!Number(base)) {
+            reject("La base ingresada no es un número");
+            return;
+        }
+
+        for (let i = 1; i <= limite; i++) {
+            data += `${base} * ${i} = ${base * i} \n`;
+        }
+
+        fs.writeFileSync(`tablas/Tabla del ${base}.txt`, data, (err) => {
             if (err) reject(err);
             else {
                 resolve(colors.green(`Tabla del ${base}.txt`, "creado"));
