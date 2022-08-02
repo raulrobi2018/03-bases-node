@@ -1,22 +1,23 @@
 const fs = require("fs");
 
-const colors = require("colors/safe");
+const colors = require("colors");
 
 // Inicializamos limite con 10 por defecto
-const listarTabla = (base, limite = 10) => {
+const listarTabla = (base = 5, hasta = 10) => {
     console.log("==========================================".green);
-    console.log(`=== Tabla del ${base} con límite ${limite}`.blue);
+    console.log(`=== Tabla del ${base} con límite ${hasta}`.blue);
     console.log("==========================================".green);
 
-    for (let i = 1; i <= limite; i++) {
-        console.log(`${base} * ${i} = ${base * i}`);
+    for (let i = 1; i <= hasta; i++) {
+        console.log(`${base} ${"x".green} ${i} ${"=".green} ${base * i}`);
     }
 };
 
 //Por defecto le pongo base = 5
-const crearArchivo = (base = 5, limite = 10) => {
+const crearArchivo = (base = 5, listar = false, hasta = 10) => {
     return new Promise((resolve, reject) => {
         let data = "";
+        let consola = "";
 
         // Controla que sea número
         if (!Number(base)) {
@@ -24,8 +25,17 @@ const crearArchivo = (base = 5, limite = 10) => {
             return;
         }
 
-        for (let i = 1; i <= limite; i++) {
+        for (let i = 1; i <= hasta; i++) {
             data += `${base} * ${i} = ${base * i} \n`;
+            consola += `${base} ${"x".green} ${i} ${"=".green} ${base * i} \n`;
+        }
+
+        if (listar) {
+            console.log("==========================================".green);
+            console.log(`=== Tabla del ${base} con límite ${hasta}`.blue);
+            console.log("==========================================".green);
+
+            console.log(consola);
         }
 
         fs.writeFileSync(`tablas/Tabla del ${base}.txt`, data, (err) => {
